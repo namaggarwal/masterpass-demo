@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head th:include="layout/base :: headerFragment">
+    <title id="pageTitle">Naman's Store - Home</title>
+</head>
+<body  th:include="layout/base :: bodyFragment">
+
+<div id="pageContent">
+    <div class="homeOptions">
+        <a href="/standardCheckout" class="homeSelect">Standard Checkout</a>
+        <a href="/pair" class="homeSelect">Pair</a>
+        <a href="/expressCheckout" class="homeSelect">Express Checkout</a>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:fragment="headerFragment">
+        <meta charset="UTF-8" />
+        <title th:include=":: #pageTitle">Layout Generic Title</title>
+        <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="/css/common.css"/>
+        <script type="text/javascript" src="/js/jquery.min.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="https://sandbox.static.masterpass.com/dyn/js/switch/integration/MasterPass.client.js"></script>
+    </head>
+    <body th:fragment="bodyFragment">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4">
+
+                </div>
+                <div class="col-md-4 text-center">
+                    <h1>Naman's Awesome Store</h1>
+                </div>
+                <div class="col-md-4">
+
+                </div>
+            </div>
+            <div th:include=":: #pageContent"></div>
+        </div>
+    </body>
+</html>

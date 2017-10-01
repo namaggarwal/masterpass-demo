@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+     >
+<head th:include="layout/base :: headerFragment">
+    <title id="pageTitle">Naman's Store - Standard checkout</title>
+</head>
+<body  th:include="layout/checkout :: checkoutFragment">
+<div id="buyCont">
+    <div class="buyCont text-center">
+        <div class="text-bold">Buy With</div>
+        <img id="btnMasterpass" src="https://static.masterpass.com/dyn/img/btn/global/mp_chk_btn_147x034px.svg"/>
+    </div>
+
+    <script  th:inline="javascript" type="text/javascript">
+        /*<![CDATA[*/
+
+        function invokeLightBox(){
+
+            MasterPass.client.checkout({
+                "requestToken":[[${request_token}]],
+                "callbackUrl":"http://localhost:8080/checkout",
+                "merchantCheckoutId": [[${checkout_id}]],
+                "allowedCardTypes":["master,amex,diners,discover,maestro,visa"],
+                "version":"v6",
+                "failureCallback":function(){},
+                "cancelCallback":function(){},
+                "successCallback":function(){},
+            });
+
+
+
+        }
+
+        function initializeMasterpass(){
+
+            $("#btnMasterpass").on("click",invokeLightBox);
+
+
+        }
+
+
+        (function(){
+
+            initializeMasterpass();
+
+        })();
+        /*]]>*/
+    </script>
+</div>
+</body>
+</html>
