@@ -63,6 +63,8 @@ public class WebController extends BaseController {
             ShippingAddress shippingAddress = checkout.getShippingAddress();
             String transactionId = checkout.getTransactionId();
 
+            Card card = checkout.getCard();
+            String cardNum = card.getAccountNumber();
 
 
             httpSession.setAttribute("orderNumber", transactionId);
@@ -71,7 +73,7 @@ public class WebController extends BaseController {
 
 
 
-        return "redirect:/success";
+            return "redirect:/success";
     }
 
 
@@ -140,12 +142,14 @@ public class WebController extends BaseController {
         ModelAndView mv = new ModelAndView("standardCheckout");
         mv.addObject("checkout_id",merchantCheckoutId);
         try {
+
+
+
             RequestTokenResponse requestTokenResponse = RequestTokenApi.create(callback_url);
             request_token = requestTokenResponse.getOauthToken();
             System.out.println("Request token is" + request_token);
 
             mv.addObject("request_token", request_token);
-
             httpSession.setAttribute("request_token", request_token);
 
         } catch (SDKErrorResponseException e) {
@@ -154,6 +158,7 @@ public class WebController extends BaseController {
         }
 
         try {
+
             MerchantInitializationRequest merchantInitializationRequest = new MerchantInitializationRequest()
                     .originUrl("https://localhost:8080/standardCheckout")
                     .oAuthToken(request_token);
