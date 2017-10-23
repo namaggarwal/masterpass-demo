@@ -48,6 +48,7 @@ public class WebController extends BaseController {
             String requestToken = httpSession.getAttribute("request_token").toString();
             System.out.println("Request token is " + requestToken);
 
+            //Step 5: Get access token
             AccessTokenResponse accessTokenResponse = AccessTokenApi.create(oauthToken, oauthVerifier);
             String accessToken = accessTokenResponse.getOauthToken();
 
@@ -58,6 +59,7 @@ public class WebController extends BaseController {
                     : checkoutResourceUrl.length();
             String checkoutId = checkoutResourceUrl.substring(startIndex, endIndex);
 
+            //Step 6: Get Checkout Data
             Checkout checkout = CheckoutApi.show(checkoutId, accessToken);
 
             ShippingAddress shippingAddress = checkout.getShippingAddress();
@@ -85,8 +87,8 @@ public class WebController extends BaseController {
         mv.addObject("checkout_id",merchantCheckoutId);
         try {
 
-
-
+            //Step 1 in ApplicationStartupListener
+            //Step 2: Get request token
             RequestTokenResponse requestTokenResponse = RequestTokenApi.create(callback_url);
             request_token = requestTokenResponse.getOauthToken();
             System.out.println("Request token is" + request_token);
@@ -101,6 +103,8 @@ public class WebController extends BaseController {
 
         try {
 
+            //Step 3: Secure the lightbox
+            //Step 4 in standardCheckout.html
             MerchantInitializationRequest merchantInitializationRequest = new MerchantInitializationRequest()
                     .originUrl("https://localhost:8080/standardCheckout")
                     .oAuthToken(request_token);

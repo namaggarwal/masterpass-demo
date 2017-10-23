@@ -33,10 +33,11 @@ public class ApplicationStartupListener implements ApplicationListener<ContextRe
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         System.out.println("Initializing Masterpass APIs");
 
+        // Step 1: Configure the Keys
         MasterCardApiConfig.setSandBox (true); // to use sandbox environment
         MasterCardApiConfig.setConsumerKey(consumerKey);
         MasterCardApiConfig.setPrivateKey (getPrivateKey());
-
+        // Step 2 in WebController
         System.out.println("Masterpass APIs Initialized");
     }
 
